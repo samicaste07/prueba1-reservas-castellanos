@@ -21,23 +21,24 @@ para tener dónde trabajar con mi grupo.
    reserva queda registrada a mi nombre.
 2. **Dado** que elijo como inicio las 10:00 y como fin las 09:00, **Cuando** intento reservar,
    **Entonces** la reserva se rechaza con el mensaje "La hora de fin debe ser posterior a la de inicio".
+3. **Dado** que la sala A ya está reservada de 09:00 a 10:00, **Cuando** intento reservarla de
+   09:30 a 10:30, **Entonces** la reserva se rechaza con el mensaje exacto
+   "La sala ya está reservada en ese horario".
 
 ### Edge Cases
 
-- ¿Qué pasa si la sala ya está ocupada en ese horario?
+- Una reserva no puede solaparse con otra reserva de la misma sala.
 
 ## Requirements
 
 ### Functional Requirements
 
 - **FR-001**: El estudiante elige una sala, una hora de inicio y una hora de fin.
-- **FR-002**: La pantalla `ReservaPage` usa un `DropdownButton` para las salas y `showTimePicker`
-  para las horas.
-- **FR-003**: El estado del formulario se maneja con `setState` dentro de
-  `lib/presentation/reserva_page.dart`.
-- **FR-004**: La reserva se guarda en la tabla `reservas` de Supabase usando el paquete
-  `supabase_flutter`.
-- **FR-005**: La hora de fin debe ser posterior a la hora de inicio.
+- **FR-002**: Cuando la reserva cumple las reglas de negocio, queda registrada a nombre del estudiante.
+- **FR-003**: La hora de fin debe ser posterior a la hora de inicio; si no lo es, la reserva se rechaza
+  con el mensaje exacto "La hora de fin debe ser posterior a la de inicio".
+- **FR-004**: El sistema rechaza una reserva si su intervalo se solapa con el de otra reserva de la
+  misma sala. El rechazo muestra el mensaje exacto "La sala ya está reservada en ese horario".
 
 ### Key Entities
 
